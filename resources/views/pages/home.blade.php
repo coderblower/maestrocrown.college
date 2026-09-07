@@ -4,398 +4,393 @@
 
 @section('content')
 
-    <!-- Hero Banner Section -->
-    <section class="hero-section">
-        <div class="container">
-            <div class="hero-content">
-                <div class="hero-text-area">
-                    <div class="hero-badge">
-                        <i class="fa-solid fa-sparkles"></i> Admission Open for Session 2026
-                    </div>
-                    <h1 class="hero-title">
-                        Empowering Minds, Shaping <span>Future Leaders</span>
-                    </h1>
-                    <p class="hero-desc">
-                        Welcome to Maestro Crown College, Savar. We offer a world-class academic environment with dedicated faculty, cutting-edge science and computer laboratories, dynamic co-curricular activities, and innovative robotics clubs.
-                    </p>
-                    <div class="hero-buttons">
-                        <a href="{{ route('admission') }}" class="btn-primary">
-                            Apply for Admission <i class="fa-solid fa-arrow-right"></i>
-                        </a>
-                        <a href="{{ route('programs') }}" class="btn-outline">
-                            Explore Programs <i class="fa-solid fa-book-open"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Latest Notices Card on Hero -->
-                <div class="hero-notice-card">
-                    <div class="hero-notice-header">
-                        <h3><i class="fa-solid fa-bell"></i> College Notices</h3>
-                        <a href="{{ route('notice.index') }}" style="color: #38bdf8; font-size: 13px; font-weight: 600;">View All</a>
-                    </div>
-                    <ul class="hero-notice-list">
-                        @forelse($latestNotices as $notice)
-                            <li class="hero-notice-item">
-                                <a href="{{ route('notice.show', $notice->slug) }}" class="hero-notice-link">
-                                    {{ $notice->title }}
-                                </a>
-                                <div class="hero-notice-date">
-                                    <i class="fa-regular fa-calendar"></i> {{ $notice->published_at->format('M d, Y') }}
-                                    @if($notice->category)
-                                        <span style="background: rgba(56,189,248,0.2); color: #38bdf8; padding: 2px 8px; border-radius: 4px; margin-left: 8px;">{{ $notice->category }}</span>
-                                    @endif
-                                </div>
-                            </li>
-                        @empty
-                            <li class="hero-notice-item" style="color: #cbd5e1;">
-                                No published notices currently available.
-                            </li>
-                        @endforelse
-                    </ul>
-                </div>
+    {{-- Sub-ticker / Latest Notices Bar below Navigation --}}
+    <div class="mcc-latest-notices-bar">
+        <div class="container" style="display: flex; align-items: center; gap: 15px; padding: 10px 20px;">
+            <a href="{{ route('notice.index') }}" class="mcc-notices-badge">Latest Notices:</a>
+            <div style="flex-grow: 1; overflow: hidden;">
+                <marquee direction="left" scrollamount="6" behavior="scroll" onmouseover="this.stop();" onmouseout="this.start();" style="font-weight: 600; color: #1e293b; font-size: 15px; display: block;">
+                    Maestro Crown College estd In 2014 || This is The Official Website of Maestro Crown College
+                </marquee>
             </div>
         </div>
-    </section>
+    </div>
 
-    <!-- Welcome & About Brief Section -->
-    <section class="section section-white">
+    {{-- Featured 2x2 Section: Video, Chairman, Latest Notice, Principal --}}
+    <section class="mcc-featured-section">
         <div class="container">
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center;">
-                <div>
-                    <span class="section-subtitle">Welcome to Our Institution</span>
-                    <h2 class="section-title" style="text-align: left; margin-bottom: 20px;">
-                        Maestro Crown College: Redefining Higher Secondary Education
-                    </h2>
-                    <p style="color: #475569; font-size: 16px; line-height: 1.8; margin-bottom: 20px;">
-                        Established in 2014, <strong>Maestro Crown College</strong> (College Code: 1933, EIIN: 136876) has emerged as one of the premier higher secondary institutions in Savar, Dhaka. We provide students with quality education that blends traditional values with 21st-century skills.
-                    </p>
-                    <p style="color: #475569; font-size: 16px; line-height: 1.8; margin-bottom: 25px;">
-                        Our disciplined campus culture, structured house system, regular parent-teacher collaboration, and individualized counseling guarantee that every student achieves their fullest intellectual and moral potential.
-                    </p>
-
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 30px;">
-                        <div style="display: flex; gap: 12px; align-items: flex-start;">
-                            <div style="background: #e0f2fe; color: #0284c7; width: 40px; height: 40px; border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
-                                <i class="fa-solid fa-microscope"></i>
-                            </div>
-                            <div>
-                                <h4 style="font-size: 16px; color: #0f172a;">Advanced Labs</h4>
-                                <p style="font-size: 13px; color: #64748b;">Fully equipped Physics, Chemistry & Biology labs.</p>
-                            </div>
-                        </div>
-
-                        <div style="display: flex; gap: 12px; align-items: flex-start;">
-                            <div style="background: #fef3c7; color: #b45309; width: 40px; height: 40px; border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
-                                <i class="fa-solid fa-robot"></i>
-                            </div>
-                            <div>
-                                <h4 style="font-size: 16px; color: #0f172a;">Robotics & Innovation</h4>
-                                <p style="font-size: 13px; color: #64748b;">Hands-on coding, microcontrollers, and competitions.</p>
-                            </div>
-                        </div>
+            <div class="mcc-featured-grid">
+                
+                {{-- 1. Left Top: College Video --}}
+                <div class="mcc-featured-col">
+                    <div class="mcc-video-card">
+                        <video class="mcc-main-video" autoplay muted loop playsinline controls controlsList="nodownload" poster="{{ asset('assets/images/aboutmebrif.jpg') }}">
+                            <source src="{{ asset('assets/videos/document_6116126415545965481.mp4') }}" type="video/mp4">
+                            Your browser does not support HTML5 video.
+                        </video>
                     </div>
-
-                    <a href="{{ route('about') }}" class="read-more-btn" style="font-size: 16px;">
-                        Read More About Our Legacy <i class="fa-solid fa-arrow-right"></i>
-                    </a>
                 </div>
 
-                <div>
-                    <div style="position: relative; border-radius: 24px; overflow: hidden; box-shadow: var(--shadow-lg);">
-                        <img src="{{ asset('assets/images/aboutmebrif.jpg') }}" alt="Maestro Crown College Campus" style="width: 100%; height: 440px; object-fit: cover;">
-                        <div style="position: absolute; bottom: 20px; left: 20px; right: 20px; background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(10px); padding: 20px; border-radius: 16px; color: #ffffff; border: 1px solid rgba(255,255,255,0.15);">
-                            <div style="display: flex; justify-content: space-between; align-items: center;">
-                                <div>
-                                    <div style="font-size: 13px; color: #38bdf8; font-weight: 700;">SAVAR, DHAKA</div>
-                                    <h4 style="font-size: 18px; margin-top: 2px;">Vibrant Campus & Modern Facilities</h4>
+                {{-- 2. Right Top: Chairman's Message --}}
+                <div class="mcc-featured-col">
+                    <div class="mcc-message-box-container">
+                        <div class="mcc-message-header-tab">
+                            <span>Chairman's Message</span>
+                        </div>
+                        <div class="glass-slim-wrapper">
+                            <div class="glass-slim-card">
+                                <div class="slim-img-box">
+                                    <img decoding="async" src="{{ asset('assets/images/aboutmebrif.jpg') }}" alt="Dr. Kamrul Ahsan" class="slim-avatar">
                                 </div>
-                                <div style="font-size: 28px; color: #ce9d4d; font-weight: 800;">
-                                    10+ <span style="font-size: 12px; color: #cbd5e1; display: block; font-weight: 400;">Years of Excellence</span>
+                                <div class="slim-content">
+                                    <div class="slim-header">
+                                        <h2 class="slim-name">Dr.Kamrul Ahsan</h2>
+                                        <div class="slim-title">Chairman</div>
+                                    </div>
+                                    <p class="slim-bio">
+                                        Dear Families,<br><br>
+                                        From an early age, while many aspired to become doctors, engineers, or business leaders, my ambition was different. I wanted to become a teacher. Shaping minds and guiding young people is one of the most powerful ways to build a nation.
+                                    </p>
+                                    <a href="{{ route('message-of-chairman') }}" class="slim-btn">Read More</a>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
+                {{-- 3. Left Bottom: Latest Notices (Notice Board) --}}
+                <div class="mcc-featured-col">
+                    <div class="notice-board-fixed">
+                        <div class="notice-header-fixed">LATEST NOTICES</div>
+                        <div class="ticker-wrap-fixed">
+                            <div class="ticker-content-fixed">
+                                <div class="notice-item-fixed">
+                                    <a href="{{ route('notice.index') }}">Maestro Crown College Admission - December 2024</a>
+                                </div>
+                                <div class="notice-item-fixed">
+                                    <a href="{{ route('academic-calendar') }}">Maestro Crown College Academic Calendar - 2026</a>
+                                </div>
+                                <div class="notice-item-fixed">
+                                    <a href="{{ route('notice.index') }}">Routine of Test Examination - 2026: Class XII students</a>
+                                </div>
+                                <div class="notice-item-fixed">
+                                    <a href="{{ route('notice.index') }}">Practical Test Examination - 2024: Class XI Science stream</a>
+                                </div>
+                                @foreach($latestNotices as $notice)
+                                    <div class="notice-item-fixed">
+                                        <a href="{{ route('notice.show', $notice->slug) }}">{{ $notice->title }}</a>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {{-- 4. Right Bottom: Principal's Message --}}
+                <div class="mcc-featured-col">
+                    <div class="mcc-message-box-container">
+                        <div class="mcc-message-header-tab">
+                            <span>Principal's Message</span>
+                        </div>
+                        <div class="glass-slim-wrapper">
+                            <div class="glass-slim-card">
+                                <div class="slim-img-box">
+                                    <img decoding="async" src="{{ asset('assets/images/photo_6127672035421917065_x.jpg') }}" alt="Md. Khalilur Rahman" class="slim-avatar">
+                                </div>
+                                <div class="slim-content">
+                                    <div class="slim-header">
+                                        <h2 class="slim-name">Md.Khalilur Rahman</h2>
+                                        <div class="slim-title">Principal</div>
+                                    </div>
+                                    <p class="slim-bio">
+                                        Dear All,<br><br>
+                                        I am truly humbled to welcome you to our vibrant learning community. As Principal, I see every day as an opportunity to make a difference in the lives of our students and their families..
+                                    </p>
+                                    <a href="{{ route('message-of-principal') }}" class="slim-btn">Read More</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
 
-    <!-- Leadership Messages (Chairman & Principal) -->
-    <section class="section section-light">
+    {{-- Photo Gallery: 3D Rotating Cylinder Showcase --}}
+    <section class="gallery-section">
         <div class="container">
-            <div class="section-header">
-                <span class="section-subtitle">Leadership & Guidance</span>
-                <h2 class="section-title">Messages from Our Administration</h2>
-                <div class="section-divider"></div>
-            </div>
+            <h2 class="section-title-custom"><span>Photo Gallery</span></h2>
+            <p class="section-subtitle-custom">Click on any image to enlarge.</p>
 
-            <div class="leadership-grid">
-                <!-- Chairman Card -->
-                <div class="leader-card">
-                    <div class="leader-top">
-                        <img src="{{ asset('assets/images/photo_6120749823746051688_x-150x150.jpg') }}" alt="Dr. Kamrul Ahsan" class="leader-avatar">
-                        <div class="leader-meta">
-                            <h3>Dr. Kamrul Ahsan</h3>
-                            <div class="leader-role">Chairman, Governing Body</div>
-                            <div class="leader-qual">Professor, Department of Philosophy, Jahangirnagar University</div>
-                        </div>
-                    </div>
-                    <div class="leader-body">
-                        <p class="leader-quote">
-                            "Maestro Crown College is founded on the philosophy that true education must illuminate both the intellect and moral conscience. We nurture young minds to not only excel in examinations but also become ethical, innovative leaders of tomorrow's global society."
-                        </p>
-                        <a href="{{ route('message-of-chairman') }}" class="read-more-btn">
-                            Read Chairman's Full Message <i class="fa-solid fa-arrow-right"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Principal Card -->
-                <div class="leader-card">
-                    <div class="leader-top">
-                        <img src="{{ asset('assets/images/photo_6127672035421917065_x.jpg') }}" alt="Md. Khalilur Rahman" class="leader-avatar">
-                        <div class="leader-meta">
-                            <h3>Md. Khalilur Rahman</h3>
-                            <div class="leader-role">Principal & Member Secretary</div>
-                            <div class="leader-qual">Experienced Academician & Educational Leader</div>
-                        </div>
-                    </div>
-                    <div class="leader-body">
-                        <p class="leader-quote">
-                            "I am truly humbled to welcome you to our vibrant learning community. As Principal, I see every day as an opportunity to inspire curiosity, foster discipline, and provide our students with the strongest possible springboard for university admissions and career triumph."
-                        </p>
-                        <a href="{{ route('message-of-principal') }}" class="read-more-btn">
-                            Read Principal's Full Message <i class="fa-solid fa-arrow-right"></i>
-                        </a>
-                    </div>
+            <div class="slider-container">
+                <div class="slider">
+                    <span onclick="openLightbox(this)" title="Campus Life">
+                        <img decoding="async" src="{{ asset('assets/images/487875279_1174675554663307_560618647300892608_n.jpg') }}" alt="Gallery Image 1">
+                    </span>
+                    <span onclick="openLightbox(this)" title="Classroom Sessions">
+                        <img decoding="async" src="{{ asset('assets/images/294751604_456475836483286_721815900096184952_n.jpg') }}" alt="Gallery Image 2">
+                    </span>
+                    <span onclick="openLightbox(this)" title="Cultural Activities">
+                        <img decoding="async" src="{{ asset('assets/images/476832929_1134791768651686_8006870201329393673_n.jpg') }}" alt="Gallery Image 3">
+                    </span>
+                    <span onclick="openLightbox(this)" title="Robotics & Science Lab">
+                        <img decoding="async" src="{{ asset('assets/images/473285500_2636321196538113_7340129627340135027_n.jpg') }}" alt="Gallery Image 4">
+                    </span>
+                    <span onclick="openLightbox(this)" title="Teacher & Student Interaction">
+                        <img decoding="async" src="{{ asset('assets/images/470991510_2618447508325482_4592017110440847998_n.jpg') }}" alt="Gallery Image 5">
+                    </span>
+                    <span onclick="openLightbox(this)" title="Campus Events">
+                        <img decoding="async" src="{{ asset('assets/images/489686093_1181549030642626_6022692502881831407_n.jpg') }}" alt="Gallery Image 6">
+                    </span>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Facilities Section -->
-    <section class="section section-white">
+    {{-- Stats Counters (Over Book Background) --}}
+    <section class="mcc-book-stat-section" style="background-image: url('{{ asset('assets/images/photo_6118378215819644143_y.jpg') }}');">
         <div class="container">
-            <div class="section-header">
-                <span class="section-subtitle">Campus Infrastructure</span>
-                <h2 class="section-title">World-Class Facilities</h2>
-                <div class="section-divider"></div>
+            <div class="stat-wrapper-main">
+                <div class="stat-box">
+                    <div class="stat-value">1300</div>
+                    <div class="stat-title">Students</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value">25+</div>
+                    <div class="stat-title">Class Rooms</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value">41</div>
+                    <div class="stat-title">Teachers</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value">20+</div>
+                    <div class="stat-title">Admin Staff</div>
+                </div>
             </div>
+        </div>
+    </section>
 
+    {{-- Facilities Section --}}
+    <section class="facilities-section-custom">
+        <div class="container">
+            <h2 class="facilities-heading-title">Facilities</h2>
             <div class="facilities-grid">
-                <!-- Library -->
                 <div class="facility-card">
-                    <div class="facility-img-wrapper">
-                        <img src="{{ asset('assets/images/470991510_2618447508325482_4592017110440847998_n.jpg') }}" alt="Central Library">
-                        <span class="facility-badge"><i class="fa-solid fa-book"></i> Central Library</span>
-                    </div>
-                    <div class="facility-content">
-                        <h3>Enriched College Library</h3>
-                        <p>
-                            A quiet, resource-rich library housing thousands of textbooks, reference journals, Olympiad guides, and digital study materials with a spacious reading room.
-                        </p>
-                    </div>
+                    <div class="facility-icon">📚</div>
+                    <h3>Library</h3>
                 </div>
-
-                <!-- Computer Lab -->
                 <div class="facility-card">
-                    <div class="facility-img-wrapper">
-                        <img src="{{ asset('assets/images/294751604_456475836483286_721815900096184952_n.jpg') }}" alt="Computer Lab">
-                        <span class="facility-badge"><i class="fa-solid fa-desktop"></i> ICT Lab</span>
-                    </div>
-                    <div class="facility-content">
-                        <h3>Modern Computer & ICT Lab</h3>
-                        <p>
-                            High-speed internet and networked PCs configured for C-programming, web development, multimedia, and board-mandated practical curriculum.
-                        </p>
-                    </div>
+                    <div class="facility-icon">💻</div>
+                    <h3>Computer Lab</h3>
                 </div>
-
-                <!-- Science Lab -->
                 <div class="facility-card">
-                    <div class="facility-img-wrapper">
-                        <img src="{{ asset('assets/images/473285500_2636321196538113_7340129627340135027_n.jpg') }}" alt="Science Lab">
-                        <span class="facility-badge"><i class="fa-solid fa-flask"></i> Science Labs</span>
-                    </div>
-                    <div class="facility-content">
-                        <h3>Equipped Science Laboratories</h3>
-                        <p>
-                            Separate, fully-outfitted Physics, Chemistry, and Biology laboratories equipped with modern apparatus to ensure hands-on experiential scientific learning.
-                        </p>
-                    </div>
+                    <div class="facility-icon">🔬</div>
+                    <h3>Science Lab</h3>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Achievements & Counters -->
-    <section class="achievements-section">
+    {{-- Our Achievements Section --}}
+    <section class="achievements-section-custom">
         <div class="container">
-            <div class="stats-grid">
-                <div class="stat-item">
-                    <div class="stat-icon"><i class="fa-solid fa-user-graduate"></i></div>
-                    <div class="stat-number">100%</div>
-                    <div class="stat-label">HSC Pass Rate</div>
+            <h2 class="achieve-section-title">Our Achievements</h2>
+            <div class="achievements-grid">
+                <div class="achieve-card">
+                    <div class="achieve-badge badge-hsc">
+                        <span class="badge-text-large">97%</span>
+                        <span class="badge-text-small">Results</span>
+                    </div>
+                    <h3>HSC Students Passed</h3>
+                    <p>Most of our students achieved A+ in the last board examinations. We are immensely proud of their hard work, dedication, and intelligence. In 2017, we came first in terms of results within the Savar area..</p>
                 </div>
-
-                <div class="stat-item">
-                    <div class="stat-icon"><i class="fa-solid fa-award"></i></div>
-                    <div class="stat-number">40+</div>
-                    <div class="stat-label">Qualified Faculty Members</div>
-                </div>
-
-                <div class="stat-item">
-                    <div class="stat-icon"><i class="fa-solid fa-trophy"></i></div>
-                    <div class="stat-number">25+</div>
-                    <div class="stat-label">Sports & Olympiad Trophies</div>
-                </div>
-
-                <div class="stat-item">
-                    <div class="stat-icon"><i class="fa-solid fa-calendar-star"></i></div>
-                    <div class="stat-number">2014</div>
-                    <div class="stat-label">Year Established</div>
+                <div class="achieve-card">
+                    <div class="achieve-badge badge-sports">
+                        <span style="font-size: 38px;">🏆</span>
+                        <span class="badge-text-small">Awards</span>
+                    </div>
+                    <h3>Sports Achievements</h3>
+                    <p>Our students have won numerous awards in various inter-school and national sports competitions, demonstrating excellence beyond academics.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Photo Gallery Preview -->
-    <section class="section section-light">
+    {{-- Quick Access Grid (6 Blue Cards) --}}
+    <section class="quick-links-section-custom">
         <div class="container">
-            <div class="section-header">
-                <span class="section-subtitle">Life at Maestro Crown</span>
-                <h2 class="section-title">Campus Photo Gallery</h2>
-                <div class="section-divider"></div>
-            </div>
-
-            <div class="gallery-masonry">
-                <div class="gallery-card" data-title="HSC Students Celebration">
-                    <img src="{{ asset('assets/images/487875279_1174675554663307_560618647300892608_n.jpg') }}" alt="HSC Success">
-                    <div class="gallery-overlay">
-                        <h4>HSC Achievers</h4>
-                        <p>Celebrating outstanding academic milestones</p>
-                    </div>
-                </div>
-
-                <div class="gallery-card" data-title="Robotics Demonstration">
-                    <img src="{{ asset('assets/images/473610256_2636321163204783_2626770157811180023_n.jpg') }}" alt="Robotics Demonstration">
-                    <div class="gallery-overlay">
-                        <h4>Robotics Club</h4>
-                        <p>Practical application & innovation</p>
-                    </div>
-                </div>
-
-                <div class="gallery-card" data-title="Sports Championship">
-                    <img src="{{ asset('assets/images/476832929_1134791768651686_8006870201329393673_n.jpg') }}" alt="Sports Trophy">
-                    <div class="gallery-overlay">
-                        <h4>Cricket Tournament</h4>
-                        <p>Championship victory celebration</p>
-                    </div>
-                </div>
-
-                <div class="gallery-card" data-title="Annual Cultural Gathering">
-                    <img src="{{ asset('assets/images/489686093_1181549030642626_6022692502881831407_n.jpg') }}" alt="Annual Program">
-                    <div class="gallery-overlay">
-                        <h4>College Program</h4>
-                        <p>Cultural evening and assembly</p>
-                    </div>
-                </div>
-            </div>
-
-            <div style="text-align: center; margin-top: 40px;">
-                <a href="{{ route('gallery') }}" class="btn-primary">
-                    View Complete Gallery (20+ Photos) <i class="fa-solid fa-images"></i>
+            <div class="quick-links-container">
+                <a href="{{ route('message-of-principal') }}" class="link-card">
+                    <div class="link-icon">👨‍💼</div>
+                    <div class="link-title">Principal</div>
+                </a>
+                <a href="{{ route('teachers') }}" class="link-card">
+                    <div class="link-icon">👨‍🏫</div>
+                    <div class="link-title">Faculty & Staffs</div>
+                </a>
+                <a href="{{ route('academic-calendar') }}" class="link-card">
+                    <div class="link-icon">📊</div>
+                    <div class="link-title">Best Results</div>
+                </a>
+                <a href="{{ route('programs') }}" class="link-card">
+                    <div class="link-icon">🎓</div>
+                    <div class="link-title">Alumni</div>
+                </a>
+                <a href="{{ route('programs') }}" class="link-card">
+                    <div class="link-icon">🏠</div>
+                    <div class="link-title">Clubs</div>
+                </a>
+                <a href="{{ route('admission') }}" class="link-card">
+                    <div class="link-icon">ℹ️</div>
+                    <div class="link-title">Ready For Admission?</div>
                 </a>
             </div>
         </div>
     </section>
 
-    <!-- Bento Contact Section & Interactive Message Form -->
-    <section class="contact-section-wrapper">
+    {{-- Get In Touch & Visitor Counters Section --}}
+    <section class="quick-contact-section">
         <div class="container">
-            <div class="section-header" style="margin-bottom: 40px;">
-                <span class="section-subtitle" style="color: #38bdf8;">Let's Connect</span>
-                <h2 class="section-title" style="color: #ffffff;">Get In Touch with Maestro Crown College</h2>
-                <div class="section-divider"></div>
-            </div>
+            <div class="contact-counter-flex-wrapper">
+                
+                {{-- Left: Contact Buttons --}}
+                <div class="contact-left-col">
+                    <h2 class="contact-heading">Get In Touch</h2>
+                    <div class="contact-btn-wrapper">
+                        <a href="https://www.facebook.com/Maestrocrown" target="_blank" class="contact-btn btn-facebook">
+                            <svg viewBox="0 0 320 512"><path d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z"/></svg>
+                            <span>Facebook</span>
+                        </a>
 
-            <div class="bento-contact-grid">
-                <!-- Left Side Info -->
-                <div>
-                    <h3 style="font-size: 28px; font-weight: 700; margin-bottom: 15px;">Welcome to MCC</h3>
-                    <p style="color: #cbd5e1; font-size: 16px; line-height: 1.7; margin-bottom: 30px;">
-                        Have queries about class XI admission, subject combinations, syllabus, or fee structure? Reach out to our admission counselors or visit our Savar campus.
-                    </p>
+                        <a href="mailto:admin@maestrocrown.edu.bd" target="_blank" class="contact-btn btn-email">
+                            <svg viewBox="0 0 512 512"><path d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4 8.5 27 8.5 38.4 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48H48zM0 176V384c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V176L294.4 339.2c-22.8 17.1-54 17.1-76.8 0L0 176z"/></svg>
+                            <span>Email Us</span>
+                        </a>
 
-                    <div class="contact-card-box">
-                        <div class="contact-card-icon"><i class="fa-solid fa-location-dot"></i></div>
-                        <div>
-                            <div style="font-size: 13px; color: #94a3b8; font-weight: 600;">MAIN CAMPUS</div>
-                            <div style="font-size: 14.5px; font-weight: 500; color: #ffffff;">107/2, Dogormura, Radio Colony, Dhaka Aricha Highway, Savar, 1343</div>
-                        </div>
+                        <a href="tel:+8801309136876" class="contact-btn btn-phone" onclick="handlePhoneClick(event, '+880 1309-136876')">
+                            <svg viewBox="0 0 512 512"><path d="M164.9 24.6c-7.7-18.6-28-28.5-47.4-23.2l-88 24C12.1 30.2 0 46 0 64C0 311.4 200.6 512 448 512c18 0 33.8-12.1 38.6-29.5l24-88c5.3-19.4-4.6-39.7-23.2-47.4l-96-40c-16.3-6.8-35.2-2.1-46.3 11.6L304.7 368C234.3 334.7 177.3 277.7 144 207.3L193.3 167c13.7-11.2 18.4-30 11.6-46.3l-40-96z"/></svg>
+                            <span class="phone-text">Call Now</span>
+                        </a>
                     </div>
+                </div>
 
-                    <div class="contact-card-box">
-                        <div class="contact-card-icon"><i class="fa-solid fa-phone"></i></div>
-                        <div>
-                            <div style="font-size: 13px; color: #94a3b8; font-weight: 600;">HOTLINE & WHATSAPP</div>
-                            <div style="font-size: 15px; font-weight: 600; color: #ffffff;">
-                                <a href="tel:+8801309136876">+880 1309-136876</a>
-                            </div>
+                {{-- Right: Mini Visitors Counters --}}
+                <div class="counter-right-col">
+                    <div class="mini-counter-wrapper">
+                        <div class="mini-card border-blue">
+                            <div class="mini-icon">🌍</div>
+                            <span class="mini-number" id="count-total">0</span>
+                            <div class="mini-label">Total Visitors</div>
                         </div>
-                    </div>
 
-                    <div class="contact-card-box">
-                        <div class="contact-card-icon"><i class="fa-solid fa-envelope"></i></div>
-                        <div>
-                            <div style="font-size: 13px; color: #94a3b8; font-weight: 600;">OFFICIAL INQUIRY</div>
-                            <div style="font-size: 15px; font-weight: 600; color: #ffffff;">
-                                <a href="mailto:admin@maestrocrown.edu.bd">admin@maestrocrown.edu.bd</a>
-                            </div>
+                        <div class="mini-card border-green">
+                            <div class="mini-icon">📅</div>
+                            <span class="mini-number" id="count-today">0</span>
+                            <div class="mini-label">Today</div>
+                        </div>
+
+                        <div class="mini-card border-gold">
+                            <div class="mini-icon">⏳</div>
+                            <span class="mini-number" id="count-hour">0</span>
+                            <div class="mini-label">This Hour</div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Right Side Form -->
-                <div class="contact-form-box">
-                    <h3 style="font-size: 22px; font-weight: 700; color: #0f172a; margin-bottom: 20px;">Send Us a Message</h3>
-                    
-                    <form action="{{ route('contact.store') }}" method="POST">
-                        @csrf
-                        <div class="form-group">
-                            <label class="form-label">Full Name *</label>
-                            <input type="text" name="name" class="form-control" required placeholder="Your full name">
-                        </div>
-
-                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
-                            <div class="form-group">
-                                <label class="form-label">Email Address *</label>
-                                <input type="email" name="email" class="form-control" required placeholder="your.email@example.com">
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label">Phone Number</label>
-                                <input type="tel" name="phone" class="form-control" placeholder="01XXXXXXXXX">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="form-label">Subject</label>
-                            <input type="text" name="subject" class="form-control" placeholder="Admission Inquiry / General Question">
-                        </div>
-
-                        <div class="form-group">
-                            <label class="form-label">Message *</label>
-                            <textarea name="message" class="form-control" required placeholder="Write your message here..."></textarea>
-                        </div>
-
-                        <button type="submit" class="btn-primary" style="width: 100%; justify-content: center; border: none; cursor: pointer; font-size: 16px;">
-                            Send Message <i class="fa-solid fa-paper-plane"></i>
-                        </button>
-                    </form>
-                </div>
             </div>
         </div>
     </section>
 
+    {{-- Lightbox Modal for Photo Gallery --}}
+    <div id="photoLightbox" class="lightbox-modal">
+        <span class="close-btn" onclick="closeLightbox()">&times;</span>
+        <img decoding="async" id="modalImage" class="modal-content" src="" alt="Enlarged Image">
+    </div>
+
 @endsection
+
+@push('scripts')
+<script>
+    // Gallery Lightbox
+    function openLightbox(element) {
+        let img = element.querySelector('img');
+        let imgUrl = img.src;
+        let altText = img.alt;
+        
+        let modal = document.getElementById("photoLightbox");
+        let modalImg = document.getElementById("modalImage");
+        
+        modalImg.src = imgUrl;
+        modalImg.alt = altText;
+        
+        modal.style.display = "flex";
+        document.body.style.overflow = "hidden";
+    }
+
+    function closeLightbox() {
+        document.getElementById("photoLightbox").style.display = "none";
+        document.body.style.overflow = "auto";
+    }
+
+    window.addEventListener('click', function(event) {
+        let modal = document.getElementById("photoLightbox");
+        if (event.target === modal) {
+            closeLightbox();
+        }
+    });
+
+    document.addEventListener('keydown', function(event) {
+        if (event.key === "Escape") {
+            closeLightbox();
+        }
+    });
+
+    // Copy phone number on Desktop click
+    function handlePhoneClick(event, phoneNumber) {
+        const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        if (!isMobile) {
+            event.preventDefault();
+            const btn = event.currentTarget;
+            const textSpan = btn.querySelector('.phone-text');
+            const originalText = textSpan.innerText;
+            
+            textSpan.innerText = phoneNumber + " (Copied!)";
+            navigator.clipboard.writeText(phoneNumber).catch(err => console.log('Copy failed', err));
+            
+            setTimeout(() => {
+                textSpan.innerText = originalText;
+            }, 3000);
+        }
+    }
+
+    // Mini Counters Animation
+    const counters = {
+        total: 300,
+        today: 200,
+        hour: 45
+    };
+
+    function animateCounter(id, start, end, duration) {
+        const obj = document.getElementById(id);
+        if (!obj) return;
+        let startTimestamp = null;
+        const step = (timestamp) => {
+            if (!startTimestamp) startTimestamp = timestamp;
+            const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+            obj.innerHTML = Math.floor(progress * (end - start) + start).toLocaleString();
+            if (progress < 1) {
+                window.requestAnimationFrame(step);
+            }
+        };
+        window.requestAnimationFrame(step);
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        animateCounter("count-total", 0, counters.total, 2000);
+        animateCounter("count-today", 0, counters.today, 1500);
+        animateCounter("count-hour", 0, counters.hour, 1000);
+    });
+</script>
+@endpush
