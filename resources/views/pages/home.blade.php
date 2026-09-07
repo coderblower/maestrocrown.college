@@ -149,7 +149,7 @@
     </section>
 
     {{-- Stats Counters (Over Book Background) --}}
-    <section class="mcc-book-stat-section" style="background-image: url('{{ asset('assets/images/photo_6118378215819644143_y.jpg') }}');">
+    <section class="mcc-book-stat-section" style="background-image: url('{{ asset('assets/images/book-counter-bg.jpg') }}');">
         <div class="container">
             <div class="stat-wrapper-main">
                 <div class="stat-box">
