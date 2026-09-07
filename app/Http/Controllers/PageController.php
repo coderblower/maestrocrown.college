@@ -250,4 +250,28 @@ class PageController extends Controller
 
         return view('pages.gallery', ['photos' => $photos]);
     }
+
+    /**
+     * Display Privacy Policy page.
+     */
+    public function privacyPolicy(): View
+    {
+        return view('pages.privacy-policy');
+    }
+
+    /**
+     * Display Terms & Conditions page.
+     */
+    public function termsAndConditions(): View
+    {
+        return view('pages.terms-and-conditions');
+    }
+
+    /**
+     * Display Account Deletion page.
+     */
+    public function deleteAccount(): View
+    {
+        return view('pages.delete-account');
+    }
 }

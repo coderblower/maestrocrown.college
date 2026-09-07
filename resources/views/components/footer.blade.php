@@ -46,6 +46,9 @@
                     <li><a href="{{ route('admission') }}"><i class="fa-solid fa-angle-right"></i> HSC Admission 2026</a></li>
                     <li><a href="{{ route('research') }}"><i class="fa-solid fa-angle-right"></i> Research & Robotics</a></li>
                     <li><a href="{{ route('gallery') }}"><i class="fa-solid fa-angle-right"></i> Photo Gallery</a></li>
+                    <li><a href="{{ route('privacy-policy') }}"><i class="fa-solid fa-angle-right"></i> Privacy Policy</a></li>
+                    <li><a href="{{ route('terms-and-conditions') }}"><i class="fa-solid fa-angle-right"></i> Terms & Conditions</a></li>
+                    <li><a href="{{ route('delete-account') }}"><i class="fa-solid fa-angle-right"></i> Delete Account</a></li>
                     <li><a href="https://sms-black-tau.vercel.app/#dashboard" target="_blank"><i class="fa-solid fa-lock"></i> EMS Portal Login</a></li>
                 </ul>
             </div>
@@ -77,9 +80,12 @@
             <div>
                 &copy; {{ date('Y') }} <strong>Maestro Crown College</strong>. All Rights Reserved.
             </div>
-            <div style="display: flex; gap: 20px;">
+            <div style="display: flex; gap: 20px; flex-wrap: wrap;">
                 <a href="{{ route('admission') }}" style="color: #ce9d4d; font-weight: 600;">Apply Online</a>
                 <a href="{{ route('notice.index') }}" style="color: #cbd5e1;">Notices</a>
+                <a href="{{ route('privacy-policy') }}" style="color: #cbd5e1;">Privacy Policy</a>
+                <a href="{{ route('terms-and-conditions') }}" style="color: #cbd5e1;">Terms & Conditions</a>
+                <a href="{{ route('delete-account') }}" style="color: #cbd5e1;">Delete Account</a>
                 <a href="{{ route('contact') }}" style="color: #cbd5e1;">Contact Us</a>
             </div>
         </div>

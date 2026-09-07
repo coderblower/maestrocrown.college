@@ -44,3 +44,11 @@ Route::post('/contact', [InquiryController::class, 'storeContact'])->name('conta
 // Gallery
 Route::get('/gellery', [PageController::class, 'gallery'])->name('gallery.old');
 Route::get('/gallery', [PageController::class, 'gallery'])->name('gallery');
+
+// Legal & Policies
+Route::get('/privacy-policy', [PageController::class, 'privacyPolicy'])->name('privacy-policy');
+Route::get('/terms-and-conditions', [PageController::class, 'termsAndConditions'])->name('terms-and-conditions');
+
+// Account Deletion
+Route::get('/delete-account', [PageController::class, 'deleteAccount'])->name('delete-account');
+Route::post('/delete-account', [InquiryController::class, 'storeAccountDeletion'])->name('delete-account.store');

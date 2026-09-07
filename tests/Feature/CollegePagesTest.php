@@ -46,6 +46,9 @@ class CollegePagesTest extends TestCase
             '/contact',
             '/gallery',
             '/gellery',
+            '/privacy-policy',
+            '/terms-and-conditions',
+            '/delete-account',
         ];
 
         foreach ($routes as $url) {
@@ -95,6 +98,31 @@ class CollegePagesTest extends TestCase
             'phone' => '01812345678',
             'ssc_gpa' => '5.00',
             'group' => 'Science',
+        ]);
+    }
+
+    public function test_account_deletion_page_and_submission(): void
+    {
+        $getResponse = $this->get('/delete-account');
+        $getResponse->assertStatus(200);
+        $getResponse->assertSee('Delete Account');
+        $getResponse->assertSee('Account Deletion Request');
+
+        $payload = [
+            'name' => 'Shakil Mahmud',
+            'identifier' => 'shakil@example.com',
+            'student_id' => 'MCC-2026-1045',
+            'class_group' => 'Class XI - Science',
+            'reason' => 'Transferring to another district due to family relocation.',
+        ];
+
+        $postResponse = $this->post('/delete-account', $payload);
+        $postResponse->assertSessionHas('deletion_success');
+        $this->assertDatabaseHas('account_deletion_requests', [
+            'name' => 'Shakil Mahmud',
+            'identifier' => 'shakil@example.com',
+            'student_id' => 'MCC-2026-1045',
+            'status' => 'Pending',
         ]);
     }
 }

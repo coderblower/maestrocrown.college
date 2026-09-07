@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AccountDeletionRequest;
 use App\Models\AdmissionInquiry;
 use App\Models\ContactMessage;
 use Illuminate\Http\RedirectResponse;
@@ -48,5 +49,23 @@ class InquiryController extends Controller
         AdmissionInquiry::create($validated);
 
         return back()->with('admission_success', 'Congratulations! Your online admission request has been submitted successfully. Our admission cell will contact you soon.');
+    }
+
+    /**
+     * Store an account deletion request.
+     */
+    public function storeAccountDeletion(Request $request): RedirectResponse
+    {
+        $validated = $request->validate([
+            'name' => 'required|string|max:150',
+            'identifier' => 'required|string|max:150',
+            'student_id' => 'required|string|max:100',
+            'class_group' => 'nullable|string|max:100',
+            'reason' => 'nullable|string|max:3000',
+        ]);
+
+        AccountDeletionRequest::create($validated);
+
+        return back()->with('deletion_success', 'Your account deletion request has been submitted successfully. Our support team will verify your student identity and confirm via your registered contact details.');
     }
 }
